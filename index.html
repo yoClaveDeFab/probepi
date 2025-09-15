@@ -129,28 +129,37 @@
       </div>
     </section>
 
-    <!-- Slide 4: Unidades temáticas (2 GIFs) -->
+    <!-- Slide 4: Unidades (1 GIF) -->
     <section class="slide inactive" data-index="3">
       <div class="layout">
         <div class="panel" style="grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center;">
           <h2>Unidades temáticas y seguimiento</h2>
-          <img src="./img/unidadesprobepi.gif" alt="Unidades parte 1"
-               style="width:100%; max-width:720px; border-radius:12px; background:#f9fafb; margin-bottom:24px;">
-          <img src="./img/unidadesprobepi2.gif" alt="Unidades parte 2"
+          <img src="./img/unidadesprobepi.gif" alt="Unidades temáticas"
                style="width:100%; max-width:720px; border-radius:12px; background:#f9fafb;">
-          <div class="caption">Resumen visual completo de las unidades y su seguimiento.</div>
+          <div class="caption">Resumen visual de las unidades.</div>
         </div>
       </div>
     </section>
 
-    <!-- Slide 5: Google Classroom (clasroom.gif) -->
+    <!-- Slide 5: Classroom + segundo GIF -->
     <section class="slide inactive" data-index="4">
       <div class="layout">
         <div class="panel" style="grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center;">
-          <h2>Trabajo autónomo en Google Classroom</h2>
+          <h2>Trabajo autónomo y seguimiento</h2>
+
+          <!-- GIF 1: clasroom.gif (nombre exacto con una sola 's') -->
           <img src="./img/clasroom.gif" alt="Trabajo autónomo en Google Classroom"
-               style="width:100%; max-width:720px; border-radius:12px; background:#f9fafb;">
-          <div class="caption">Así se gestionó el seguimiento de tareas, materiales y retroalimentación en línea.</div>
+               style="width:100%; max-width:720px; border-radius:12px; background:#f9fafb; margin-bottom:24px;">
+
+          <!-- GIF 2: unidadesprobepi2.gif con cache-buster + fallback -->
+          <img
+            src="./img/unidadesprobepi2.gif?v=3"
+            alt="Unidades complementarias"
+            style="width:100%; max-width:720px; border-radius:12px; background:#f9fafb;"
+            onerror="this.onerror=null; this.src='./img/unidadesprobepi2.gif?bust='+Date.now();"
+          >
+
+          <div class="caption">Classroom para tareas y retro; visual complementaria de unidades.</div>
         </div>
       </div>
     </section>
