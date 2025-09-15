@@ -18,7 +18,14 @@
     }
     html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; background: var(--bg); color: var(--fg); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
     .deck { position: relative; height: 100vh; width: 100vw; overflow: hidden; }
-    .slide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6vmin; transition: transform .45s ease, opacity .45s ease; }
+    .slide {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 6vmin;
+      transition: transform .45s ease, opacity .45s ease;
+      /* 👇 permita desplazar cuando el contenido es más alto que la pantalla */
+      overflow: auto;
+    }
     .slide[hidden] { display: none; }
     .slide.inactive { opacity: 0; transform: translateX(4%); }
     .slide.active { opacity: 1; transform: translateX(0); }
@@ -34,7 +41,7 @@
     .wa-header .name { font-weight: 600; }
     .wa-header .meta { font-size: 12px; opacity: .85; }
     .wa-chat { flex: 1; overflow: auto; padding: 14px; background: linear-gradient(#dddbd1 0%, #d2dbdc 100%); }
-    .bubble { max-width: 78%; padding: 10px 12px; border-radius: 14px; margin: 6px 0; position: relative; font-size: 15px; line-height: 1.35; box-shadow: 0 1px 0 rgba(0, 0, 0, .08); }
+    .bubble { max-width: 78%; padding: 10px 12px; border-radius: 14px; margin: 6px 0; position: relative; font-size: 15px; line-height: 1.35; box-shadow: 0 1px 0 rgba(0,0,0,.08); }
     .in { background: var(--wa-out); }
     .out { background: var(--wa-in); margin-left: auto; }
     .time { display: inline-block; font-size: 11px; color: #6b7280; margin-left: 8px; }
@@ -70,7 +77,7 @@
 <body>
   <div class="deck">
 
-    <!-- Slide 1: Título -->
+    <!-- 1: Título -->
     <section class="slide active" data-index="0">
       <div class="title">
         <span class="pill">Ponencia · Probepi</span>
@@ -79,7 +86,7 @@
       </div>
     </section>
 
-    <!-- Slide 2: WhatsApp -->
+    <!-- 2: WhatsApp -->
     <section class="slide inactive" data-index="1">
       <div class="phone">
         <div class="screen">
@@ -94,7 +101,7 @@
       </div>
     </section>
 
-    <!-- Slide 3: Sesiones y logística -->
+    <!-- 3: Sesiones y logística -->
     <section class="slide inactive" data-index="2">
       <div class="layout">
         <div class="panel">
@@ -129,7 +136,7 @@
       </div>
     </section>
 
-    <!-- Slide 4: Unidades (1 GIF) -->
+    <!-- 4: Unidades (1 GIF) -->
     <section class="slide inactive" data-index="3">
       <div class="layout">
         <div class="panel" style="grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center;">
@@ -141,31 +148,35 @@
       </div>
     </section>
 
-   <!-- Slide 5: Classroom + segundo GIF -->
-<section class="slide inactive" data-index="4">
-  <div class="layout">
-    <div class="panel" style="grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center;">
-      <h2>Trabajo autónomo y seguimiento</h2>
+    <!-- 5: Classroom + segundo GIF -->
+    <section class="slide inactive" data-index="4">
+      <div class="layout">
+        <div class="panel" style="grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center;">
+          <h2>Trabajo autónomo y seguimiento</h2>
 
-      <img src="/probepi/img/clasroom.gif" alt="Trabajo autónomo en Google Classroom"
-           style="width:100%; max-width:720px; border-radius:12px; background:#f9fafb; margin-bottom:24px;">
+          <!-- GIF 1 -->
+          <img src="./img/clasroom.gif"
+               alt="Trabajo autónomo en Google Classroom"
+               loading="lazy"
+               style="display:block; width:100%; max-width:720px; max-height:38vh; object-fit:contain; border-radius:12px; background:#f9fafb; margin-bottom:18px;">
 
-      <!-- usa ruta absoluta + cache-buster y reintento automático -->
-      <img
-        src="/probepi/img/unidadesprobepi2.gif?v=4"
-        alt="Unidades complementarias"
-        style="width:100%; max-width:720px; border-radius:12px; background:#f9fafb;"
-        onerror="this.onerror=null; this.src='/probepi/img/unidadesprobepi2.gif?bust='+Date.now();"
-      >
+          <!-- GIF 2 (con rompe‑caché y reintento) -->
+          <img
+            src="./img/unidadesprobepi2.gif?v=5"
+            alt="Unidades complementarias"
+            loading="lazy"
+            style="display:block; width:100%; max-width:720px; max-height:38vh; object-fit:contain; border-radius:12px; background:#f9fafb;"
+            onerror="this.onerror=null; this.src='./img/unidadesprobepi2.gif?bust='+Date.now();"
+          >
 
-      <div class="caption">Classroom para tareas y retro; visual complementaria de unidades.</div>
-    </div>
-  </div>
-</section>
+          <div class="caption">Classroom para tareas y retro; visual complementaria de unidades.</div>
+        </div>
+      </div>
+    </section>
 
   </div>
   <div class="nav" id="nav"></div>
-  <div class="footer"> AMLA 2025</div>
+  <div class="footer">© 2025 Betsy Castillo</div>
 
   <script>
     (function () {
