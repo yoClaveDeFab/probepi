@@ -1,13 +1,389 @@
-<!-- Slide 5: Google Classroom (GIF) -->
-<section class="slide inactive" data-index="4">
-  <div class="layout">
-    <div class="panel" style="grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center;">
-      <h2>Trabajo autónomo en Google Classroom</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Enseñanza de la escritura académica · Probepi</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #111827;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --wa-header: #075E54;
+      --wa-accent: #25D366;
+      --wa-chat-bg: #ECE5DD;
+      --wa-in: #DCF8C6;
+      --wa-out: #ffffff;
+    }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--fg);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    .deck {
+      position: relative;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6vmin;
+      transition: transform .45s ease, opacity .45s ease;
+    }
+    .slide[hidden] { display: none; }
+    .slide.inactive { opacity: 0; transform: translateX(4%); }
+    .slide.active { opacity: 1; transform: translateX(0); }
 
-      <img src="./img/clasroom.gif?v=1" alt="Trabajo autónomo en Google Classroom"
-           style="width:100%; max-width:720px; border-radius:12px; background:#f9fafb;">
+    .title {
+      max-width: 1100px;
+      text-align: center;
+    }
+    .title h1 {
+      font-size: clamp(28px, 5.6vw, 56px);
+      line-height: 1.1;
+      margin: 0 0 .5rem;
+    }
+    .title p {
+      font-size: clamp(16px, 2.2vw, 22px);
+      color: var(--muted);
+      margin: .25rem 0 0;
+    }
+    .pill {
+      display: inline-flex;
+      gap: .5rem;
+      align-items: center;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      padding: .4rem .8rem;
+      border-radius: 999px;
+      font-size: .9rem;
+      margin-bottom: 1rem;
+    }
 
-      <div class="caption">Así se gestionó el seguimiento de tareas, materiales y retroalimentación en línea.</div>
-    </div>
+    .phone {
+      width: min(92vw, 420px);
+      height: min(85vh, 780px);
+      background: #000;
+      border-radius: 28px;
+      padding: 14px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, .15);
+    }
+    .phone .screen {
+      background: var(--wa-chat-bg);
+      height: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .wa-header {
+      background: var(--wa-header);
+      color: #fff;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .wa-header .name { font-weight: 600; }
+    .wa-header .meta { font-size: 12px; opacity: .85; }
+    .wa-chat {
+      flex: 1;
+      overflow: auto;
+      padding: 14px;
+      background: linear-gradient(#dddbd1 0%, #d2dbdc 100%);
+    }
+    .bubble {
+      max-width: 78%;
+      padding: 10px 12px;
+      border-radius: 14px;
+      margin: 6px 0;
+      position: relative;
+      font-size: 15px;
+      line-height: 1.35;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, .08);
+    }
+    .in { background: var(--wa-out); }
+    .out { background: var(--wa-in); margin-left: auto; }
+    .time {
+      display: inline-block;
+      font-size: 11px;
+      color: #6b7280;
+      margin-left: 8px;
+    }
+    .tick {
+      font-size: 12px;
+      color: #5f6368;
+      margin-left: 4px;
+    }
+    .date-chip {
+      align-self: center;
+      background: #fff;
+      color: #374151;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, .08);
+      margin: 8px 0;
+    }
+
+    .layout {
+      width: min(1100px, 94vw);
+      display: grid;
+      grid-template-columns: 1.2fr .9fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+    .panel {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(17, 24, 39, .06);
+    }
+    .panel h2 {
+      margin: 0 0 10px;
+      font-size: clamp(18px, 2.4vw, 28px);
+    }
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 14px 0 8px;
+    }
+    .stat {
+      background: #f9fafb;
+      border: 1px solid #eef2f7;
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+    }
+    .stat .n {
+      font-weight: 700;
+      font-size: clamp(18px, 2.4vw, 26px);
+    }
+    .stat .l {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .list { margin: 10px 0 0; padding-left: 18px; }
+    .list li { margin: .35rem 0; }
+    .imgcard {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f3f4f6;
+      border: 1px dashed #cbd5e1;
+      border-radius: 18px;
+      padding: 12px;
+      height: 100%;
+    }
+    .imgcard img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+    }
+    .caption {
+      font-size: 12px;
+      color: #6b7280;
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    .nav {
+      position: fixed;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      border: 1px solid #cbd5e1;
+    }
+    .dot.active {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    @media print {
+      .nav, .footer { display: none; }
+      .slide { position: relative; }
+      .slide.inactive { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck">
+
+    <!-- Slide 1: Título -->
+    <section class="slide active" data-index="0">
+      <div class="title">
+        <span class="pill">Ponencia · Probepi</span>
+        <h1>Enseñanza de la escritura académica: experiencias y retos en el Programa de Becas de Posgrado para Indígenas</h1>
+        <p><strong>Betsy Castillo</strong> · Septiembre de 2025</p>
+      </div>
+    </section>
+
+    <!-- Slide 2: WhatsApp -->
+    <section class="slide inactive" data-index="1">
+      <div class="phone">
+        <div class="screen">
+          <div class="wa-header">
+            <div class="name">Coordinación de Español</div>
+            <div class="meta">en línea</div>
+          </div>
+          <div class="wa-chat" id="chat">
+            <div class="date-chip">Hoy</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3: Sesiones y logística -->
+    <section class="slide inactive" data-index="2">
+      <div class="layout">
+        <div class="panel">
+          <h2>Sesiones de trabajo y logística</h2>
+          <div class="kpis">
+            <div class="stat"><div class="n">39</div><div class="l">estudiantes</div></div>
+            <div class="stat"><div class="n">10</div><div class="l">grupos</div></div>
+            <div class="stat"><div class="n">L–S</div><div class="l">AM & PM</div></div>
+          </div>
+          <ul class="list">
+            <li><strong>Equipo de asesoría:</strong></li>
+            <li>Betsy Castillo</li>
+            <li>Alma Rocío Guzmán Herrera</li>
+            <li>Liliana Mojica Hernández</li>
+          </ul>
+          <ul class="list">
+            <li><strong>Modelo:</strong> curso teórico–práctico mixto.</li>
+            <li><strong>Asesorías síncronas:</strong> Zoom.</li>
+            <li><strong>Trabajo autónomo:</strong> Google Classroom.</li>
+            <li><strong>Duración:</strong> 15 semanas.</li>
+            <li><strong>Sesiones:</strong> 2.5 horas (cada una).</li>
+            <li><strong>Total asesorado:</strong> 37 horas.</li>
+            <li><strong>Asignación de grupos:</strong> autoselección por disponibilidad horaria.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <div class="imgcard">
+            <img src="./img/sesioneszoom.png" alt="Grupos y horarios de asesoría">
+          </div>
+          <div class="caption">Grupos y horarios de asesoría (referencia visual).</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 4: Trabajo autónomo en Classroom -->
+    <section class="slide inactive" data-index="3">
+      <div class="layout">
+        <div class="panel" style="grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center;">
+          <h2>Trabajo autónomo en Google Classroom</h2>
+          <img src="./img/clasroom.gif" alt="Trabajo autónomo en Google Classroom"
+               style="width:100%; max-width:720px; border-radius:12px; background:#f9fafb;">
+          <div class="caption">Así se gestionó el seguimiento de tareas, materiales y retroalimentación en línea.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 5: Unidades temáticas (2 GIFs) -->
+    <section class="slide inactive" data-index="4">
+      <div class="layout">
+        <div class="panel" style="grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center;">
+          <h2>Unidades temáticas y seguimiento</h2>
+          <img src="./img/unidadesprobepi.gif" alt="Unidades parte 1"
+               style="width:100%; max-width:720px; border-radius:12px; background:#f9fafb; margin-bottom:24px;">
+          <img src="./img/unidadesprobepi2.gif" alt="Unidades parte 2"
+               style="width:100%; max-width:720px; border-radius:12px; background:#f9fafb;">
+          <div class="caption">Resumen visual completo de las unidades y su seguimiento.</div>
+        </div>
+      </div>
+    </section>
+
   </div>
-</section>
+  <div class="nav" id="nav"></div>
+  <div class="footer">© 2025 Betsy Castillo</div>
+
+  <script>
+    (function () {
+      const deck = document.querySelectorAll('.slide');
+      let idx = 0;
+
+      function show(i) {
+        deck.forEach((s, n) => {
+          s.classList.toggle('active', n === i);
+          s.classList.toggle('inactive', n !== i);
+        });
+        idx = i;
+        updateDots();
+        if (i === 1) startWA();
+      }
+
+      const nav = document.getElementById('nav');
+
+      function updateDots() {
+        nav.innerHTML = '';
+        deck.forEach((_, n) => {
+          const d = document.createElement('div');
+          d.className = 'dot' + (n === idx ? ' active' : '');
+          d.addEventListener('click', () => show(n));
+          nav.appendChild(d);
+        });
+      }
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight') show(Math.min(idx + 1, deck.length - 1));
+        if (e.key === 'ArrowLeft') show(Math.max(idx - 1, 0));
+      });
+
+      function startWA() {
+        const chat = document.getElementById('chat');
+        const msgs = [
+          { type: 'in', text: '¡Hola, Betsy! 😊 ¿Tienes disponibilidad para dar una clase de redacción para octubre… es para Probepi 🙌?', time: '10:02' },
+          { type: 'out', text: '¡Claro que sííí! Muchísimas gracias por pensar en mí 🤍', time: '10:03' },
+        ];
+        let i = 0;
+        function add() {
+          if (i >= msgs.length) return;
+          const m = msgs[i++];
+          const b = document.createElement('div');
+          b.className = 'bubble ' + (m.type === 'out' ? 'out' : 'in');
+          b.innerHTML = `${m.text} <span class="time">${m.time}${m.type === 'out' ? '<span class="tick">✔✔</span>' : ''}</span>`;
+          chat.appendChild(b);
+          chat.scrollTop = chat.scrollHeight;
+          setTimeout(add, 1000 + Math.random() * 600);
+        }
+        setTimeout(add, 700);
+      }
+
+      updateDots();
+    })();
+  </script>
+</body>
+</html>
