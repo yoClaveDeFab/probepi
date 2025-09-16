@@ -23,7 +23,7 @@
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       padding: 6vmin;
       transition: transform .45s ease, opacity .45s ease;
-      /* 👇 permita desplazar cuando el contenido es más alto que la pantalla */
+      /* 👇 permite desplazar cuando el contenido es más alto que la pantalla */
       overflow: auto;
     }
     .slide[hidden] { display: none; }
@@ -62,7 +62,7 @@
     .caption { font-size: 12px; color: #6b7280; text-align: center; margin-top: 6px; }
 
     .nav { position: fixed; right: 14px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 8px; }
-    .dot { width: 10px; height: 10px; border-radius: 999px; background: #e5e7eb; border: 1px solid #cbd5e1; }
+    .dot { width: 10px; height: 10px; border-radius: 999px; background: #e5e7eb; border: 1px solid #cbd5e1; cursor: pointer; }
     .dot.active { background: var(--accent); border-color: var(--accent); }
 
     .footer { position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); font-size: 12px; color: #6b7280; }
@@ -100,56 +100,6 @@
         </div>
       </div>
     </section>
-
-      <script>
-    (function () {
-      const deck = document.querySelectorAll('.slide');
-      let idx = 0;
-      function show(i) {
-        deck.forEach((s, n) => {
-          s.classList.toggle('active', n === i);
-          s.classList.toggle('inactive', n !== i);
-        });
-        idx = i;
-        updateDots();
-        if (i === 1) startWA();
-      }
-      const nav = document.getElementById('nav');
-      function updateDots() {
-        nav.innerHTML = '';
-        deck.forEach((_, n) => {
-          const d = document.createElement('div');
-          d.className = 'dot' + (n === idx ? ' active' : '');
-          d.addEventListener('click', () => show(n));
-          nav.appendChild(d);
-        });
-      }
-      document.addEventListener('keydown', e => {
-        if (e.key === 'ArrowRight') show(Math.min(idx + 1, deck.length - 1));
-        if (e.key === 'ArrowLeft') show(Math.max(idx - 1, 0));
-      });
-      function startWA() {
-        const chat = document.getElementById('chat');
-        const msgs = [
-          { type: 'in', text: '¡Hola, Betsy! 😊 ¿Tienes disponibilidad para dar una clase de redacción para octubre… es para Probepi 🙌?', time: '10:02' },
-          { type: 'out', text: '¡Claro que sííí! Muchísimas gracias por pensar en mí 🤍', time: '10:03' },
-        ];
-        let i = 0;
-        function add() {
-          if (i >= msgs.length) return;
-          const m = msgs[i++];
-          const b = document.createElement('div');
-          b.className = 'bubble ' + (m.type === 'out' ? 'out' : 'in');
-          b.innerHTML = `${m.text} <span class="time">${m.time}${m.type === 'out' ? '<span class="tick">✔✔</span>' : ''}</span>`;
-          chat.appendChild(b);
-          chat.scrollTop = chat.scrollHeight;
-          setTimeout(add, 1000 + Math.random() * 600);
-        }
-        setTimeout(add, 700);
-      }
-      updateDots();
-    })();
-  </script>
 
     <!-- 3: Sesiones y logística -->
     <section class="slide inactive" data-index="2">
@@ -198,82 +148,144 @@
       </div>
     </section>
 
-<!-- Slide 5: Classroom + Unidades complementarias -->
-<section class="slide inactive" data-index="4">
-  <div class="layout">
-    <div class="panel" style="grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center;">
-      <h2>Trabajo autónomo y seguimiento</h2>
-
-      <!-- GIF 1: classroom -->
-      <img src="./img/clasroom.gif"
-           alt="Trabajo autónomo en Google Classroom"
-           loading="lazy"
-           style="display:block; width:100%; max-width:720px; max-height:38vh; object-fit:contain; border-radius:12px; background:#f9fafb; margin-bottom:18px;">
-
-      <!-- GIF 2: unidades complementarias -->
-      <img src="./img/clasroom1.gif"
-           alt="Unidades complementarias"
-           loading="lazy"
-           style="display:block; width:100%; max-width:720px; max-height:38vh; object-fit:contain; border-radius:12px; background:#f9fafb;">
-
-      <div class="caption">Classroom para tareas y retro; visual complementaria de unidades.</div>
-    </div>
-  </div>
-</section>
-
-    <!-- Slide 6: Sesiones en Zoom -->
-<section class="slide inactive" data-index="5">
-  <div class="layout">
-    <div class="panel" style="grid-column: 1 / -1;">
-      <h2>Sesiones en Zoom</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
-        <img src="./img/captura1.png" alt="Zoom 1" style="width: 100%; border-radius: 12px;">
-        <img src="./img/captura2.png" alt="Zoom 2" style="width: 100%; border-radius: 12px;">
-        <img src="./img/captura3.png" alt="Zoom 3" style="width: 100%; border-radius: 12px;">
-        <img src="./img/captura4.png" alt="Zoom 4" style="width: 100%; border-radius: 12px;">
-        <img src="./img/captura5.png" alt="Zoom 5" style="width: 100%; border-radius: 12px;">
-        <img src="./img/captura6.png" alt="Zoom 6" style="width: 100%; border-radius: 12px;">
-        <img src="./img/captura7.png" alt="Zoom 7" style="width: 100%; border-radius: 12px;">
-        <img src="./img/captura8.png" alt="Zoom 8" style="width: 100%; border-radius: 12px;">
+    <!-- 5: Classroom + Unidades complementarias -->
+    <section class="slide inactive" data-index="4">
+      <div class="layout">
+        <div class="panel" style="grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center;">
+          <h2>Trabajo autónomo y seguimiento</h2>
+          <img src="./img/clasroom.gif"
+               alt="Trabajo autónomo en Google Classroom"
+               loading="lazy"
+               style="display:block; width:100%; max-width:720px; max-height:38vh; object-fit:contain; border-radius:12px; background:#f9fafb; margin-bottom:18px;">
+          <img src="./img/clasroom1.gif"
+               alt="Unidades complementarias"
+               loading="lazy"
+               style="display:block; width:100%; max-width:720px; max-height:38vh; object-fit:contain; border-radius:12px; background:#f9fafb;">
+          <div class="caption">Classroom para tareas y retro; visual complementaria de unidades.</div>
+        </div>
       </div>
-      <div class="caption">Momentos de nuestras sesiones virtuales: aprendizaje, reflexión y comunidad.</div>
-    </div>
-  </div>
-</section>
+    </section>
 
-    <!-- Slide 6: Retos derivados del estudiantado -->
-<section class="slide inactive" data-index="5">
-  <div class="layout" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
-    
-    <!-- Conectividad limitada -->
-    <div class="panel" style="display: flex; flex-direction: column; gap: 12px;">
-      <h2 style="font-size: 1.1rem; margin: 0;">Conectividad limitada</h2>
-      <div style="background: var(--wa-out); border-radius: 14px; padding: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); font-size: 14px; line-height: 1.4;">
-        Maestra buenas tardes, voy a conectarme desde mi cel, lo que pasa es que no tengo internet y me estoy trasladando a la capital y me falta una hora por llegar.
+    <!-- 6: Sesiones en Zoom -->
+    <section class="slide inactive" data-index="5">
+      <div class="layout">
+        <div class="panel" style="grid-column: 1 / -1;">
+          <h2>Sesiones en Zoom</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+            <img src="./img/captura1.png" alt="Zoom 1" style="width: 100%; border-radius: 12px;">
+            <img src="./img/captura2.png" alt="Zoom 2" style="width: 100%; border-radius: 12px;">
+            <img src="./img/captura3.png" alt="Zoom 3" style="width: 100%; border-radius: 12px;">
+            <img src="./img/captura4.png" alt="Zoom 4" style="width: 100%; border-radius: 12px;">
+            <img src="./img/captura5.png" alt="Zoom 5" style="width: 100%; border-radius: 12px;">
+            <img src="./img/captura6.png" alt="Zoom 6" style="width: 100%; border-radius: 12px;">
+            <img src="./img/captura7.png" alt="Zoom 7" style="width: 100%; border-radius: 12px;">
+            <img src="./img/captura8.png" alt="Zoom 8" style="width: 100%; border-radius: 12px;">
+          </div>
+          <div class="caption">Momentos de nuestras sesiones virtuales: aprendizaje, reflexión y comunidad.</div>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Carga laboral -->
-    <div class="panel" style="display: flex; flex-direction: column; gap: 12px;">
-      <h2 style="font-size: 1.1rem; margin: 0;">Carga laboral</h2>
-      <div style="background: var(--wa-out); border-radius: 14px; padding: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); font-size: 14px; line-height: 1.4;">
-        Hola maestra voy para mi trabajo voy a llegar y ahí tomaré la clase. Espero estar en unos 40 min, muchas gracias por su comprensión.
+    <!-- 7: Retos derivados del estudiantado -->
+    <!-- FIX: cambié el índice a 6 y CERRÉ TODAS LAS ETIQUETAS -->
+    <section class="slide inactive" data-index="6">
+      <div class="layout" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
+
+        <div class="panel" style="display: flex; flex-direction: column; gap: 12px;">
+          <h2 style="font-size: 1.1rem; margin: 0;">Conectividad limitada</h2>
+          <div style="background: var(--wa-out); border-radius: 14px; padding: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); font-size: 14px; line-height: 1.4;">
+            Maestra buenas tardes, voy a conectarme desde mi cel, lo que pasa es que no tengo internet y me estoy trasladando a la capital y me falta una hora por llegar.
+          </div>
+        </div>
+
+        <div class="panel" style="display: flex; flex-direction: column; gap: 12px;">
+          <h2 style="font-size: 1.1rem; margin: 0;">Carga laboral</h2>
+          <div style="background: var(--wa-out); border-radius: 14px; padding: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); font-size: 14px; line-height: 1.4;">
+            Hola maestra voy para mi trabajo voy a llegar y ahí tomaré la clase. Espero estar en unos 40 min, muchas gracias por su comprensión.
+          </div>
+        </div>
+
+        <div class="panel" style="display: flex; flex-direction: column; gap: 12px;">
+          <h2 style="font-size: 1.1rem; margin: 0;">Tareas de cuidado</h2>
+          <div style="background: var(--wa-out); border-radius: 14px; padding: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); font-size: 14px; line-height: 1.4;">
+            Hola, maestra Betsy, perdone que no me conecté, no pudo cuidar mi esposo a mis hijos, estoy viendo el classroom…
+          </div>
+        </div>
+
+        <div class="panel" style="display: flex; flex-direction: column; gap: 12px;">
+          <h2 style="font-size: 1.1rem; margin: 0;">Trayectorias académicas diversas</h2>
+          <div style="background: var(--wa-out); border-radius: 14px; padding: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); font-size: 14px; line-height: 1.4;">
+            Maestra Betsy muchas gracias por su ayuda honestamente lo que pasa es que yo no he tenido experiencia de investigación antes, entonces me está costando mucho, en donde yo estudié nos titulamos por trabajar con la comunidad y ahora me está costando mucho.
+          </div>
+        </div>
+
       </div>
-    </div>
+    </section>
 
-    <!-- Tareas de cuidado -->
-    <div class="panel" style="display: flex; flex-direction: column; gap: 12px;">
-      <h2 style="font-size: 1.1rem; margin: 0;">Tareas de cuidado</h2>
-      <div style="background: var(--wa-out); border-radius: 14px; padding: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); font-size: 14px; line-height: 1.4;">
-        Hola, maestra Betsy, perdone que no me conecté, no pudo cuidar mi esposo a mis hijos, estoy viendo el classroom…
-      </div>
-    </div>
+    <!-- FIX: Agrego el contenedor que usa el JS para los dots -->
+    <div id="nav" class="nav" aria-label="Navegación de diapositivas"></div>
 
-    <!-- Trayectorias académicas diversas -->
-    <div class="panel" style="display: flex; flex-direction: column; gap: 12px;">
-      <h2 style="font-size: 1.1rem; margin: 0;">Trayectorias académicas diversas</h2>
-      <div style="background: var(--wa-out); border-radius: 14px; padding: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); font-size: 14px; line-height: 1.4;">
-        Maestra Betsy muchas gracias por su ayuda honestamente lo que pasa es que yo no he tenido experiencia de investigación antes, entonces me está costando mucho, en donde yo estudié nos titulamos por trabajar con la comunidad y ahora me está costando mucho.
+    <div class="footer">Usa ← → para navegar</div>
 
+  </div> <!-- /deck -->
+
+  <!-- JS al final del body -->
+  <script>
+    (function () {
+      const deck = document.querySelectorAll('.slide');
+      let idx = 0;
+
+      function show(i) {
+        deck.forEach((s, n) => {
+          s.classList.toggle('active', n === i);
+          s.classList.toggle('inactive', n !== i);
+        });
+        idx = i;
+        updateDots();
+        if (i === 1) startWA();
+      }
+
+      const nav = document.getElementById('nav');
+      function updateDots() {
+        if (!nav) return; // safety
+        nav.innerHTML = '';
+        deck.forEach((_, n) => {
+          const d = document.createElement('div');
+          d.className = 'dot' + (n === idx ? ' active' : '');
+          d.addEventListener('click', () => show(n));
+          nav.appendChild(d);
+        });
+      }
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight') show(Math.min(idx + 1, deck.length - 1));
+        if (e.key === 'ArrowLeft') show(Math.max(idx - 1, 0));
+      });
+
+      function startWA() {
+        const chat = document.getElementById('chat');
+        if (!chat || chat.dataset.started) return; // evita duplicar
+        chat.dataset.started = '1';
+        const msgs = [
+          { type: 'in',  text: '¡Hola, Betsy! 😊 ¿Tienes disponibilidad para dar una clase de redacción para octubre… es para Probepi 🙌?', time: '10:02' },
+          { type: 'out', text: '¡Claro que sííí! Muchísimas gracias por pensar en mí 🤍', time: '10:03' },
+        ];
+        let i = 0;
+        function add() {
+          if (i >= msgs.length) return;
+          const m = msgs[i++];
+          const b = document.createElement('div');
+          b.className = 'bubble ' + (m.type === 'out' ? 'out' : 'in');
+          b.innerHTML = `${m.text} <span class="time">${m.time}${m.type === 'out' ? '<span class="tick">✔✔</span>' : ''}</span>`;
+          chat.appendChild(b);
+          chat.scrollTop = chat.scrollHeight;
+          setTimeout(add, 1000 + Math.random() * 600);
+        }
+        setTimeout(add, 700);
+      }
+
+      updateDots();
+    })();
+  </script>
 </body>
 </html>
