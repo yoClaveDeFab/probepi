@@ -23,8 +23,7 @@
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       padding: 6vmin;
       transition: transform .45s ease, opacity .45s ease;
-      /* 👇 permite desplazar cuando el contenido es más alto que la pantalla */
-      overflow: auto;
+      overflow: auto; /* permite scroll cuando el contenido es largo */
     }
     .slide[hidden] { display: none; }
     .slide.inactive { opacity: 0; transform: translateX(4%); }
@@ -66,6 +65,49 @@
     .dot.active { background: var(--accent); border-color: var(--accent); }
 
     .footer { position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); font-size: 12px; color: #6b7280; }
+
+    /* ====== Estilos extra para Slide 7 (cards tipo WhatsApp) ====== */
+    .wa-grid {
+      width: min(1100px, 94vw);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+      align-items: stretch;
+    }
+    .wa-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(17,24,39,.06);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .wa-card .header { display: flex; align-items: center; gap: 10px; }
+    .wa-card .avatar {
+      width: 36px; height: 36px; border-radius: 999px; background: #E5F4EA;
+      display: grid; place-items: center; font-weight: 700; font-size: 14px;
+      color: #065f46; border: 1px solid #bbf7d0;
+    }
+    .wa-card .who { display: flex; flex-direction: column; line-height: 1.1; }
+    .wa-card .name { font-weight: 600; font-size: 14px; }
+    .wa-card .meta { font-size: 12px; color: var(--muted); }
+    .wa-card .bubble { max-width: 100%; margin: 0; box-shadow: 0 1px 0 rgba(0,0,0,.06); background: #ffffff; border-radius: 14px; padding: 12px; font-size: 14px; }
+    .wa-card .tag {
+      align-self: flex-start;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 2px;
+      margin-bottom: 2px;
+      line-height: 1.2;
+    }
 
     @media print {
       .nav, .footer { display: none; }
@@ -186,46 +228,80 @@
       </div>
     </section>
 
-    <!-- 7: Retos derivados del estudiantado -->
-    <!-- FIX: cambié el índice a 6 y CERRÉ TODAS LAS ETIQUETAS -->
+    <!-- 7: Retos derivados del estudiantado (cards tipo WhatsApp) -->
     <section class="slide inactive" data-index="6">
-      <div class="layout" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
+      <div class="title" style="margin-bottom: 18px;">
+        <h2 style="margin:0; font-size: clamp(20px, 2.6vw, 34px);">Retos derivados del estudiantado</h2>
+        <p class="caption" style="margin-top:6px;">Títulos de reto primero, seguido del mensaje ejemplificador</p>
+      </div>
 
-        <div class="panel" style="display: flex; flex-direction: column; gap: 12px;">
-          <h2 style="font-size: 1.1rem; margin: 0;">Conectividad limitada</h2>
-          <div style="background: var(--wa-out); border-radius: 14px; padding: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); font-size: 14px; line-height: 1.4;">
-            Maestra buenas tardes, voy a conectarme desde mi cel, lo que pasa es que no tengo internet y me estoy trasladando a la capital y me falta una hora por llegar.
+      <div class="wa-grid">
+        <!-- Card 1: Conectividad limitada -->
+        <article class="wa-card">
+          <h3 class="tag">Conectividad limitada</h3>
+          <div class="header">
+            <div class="avatar" aria-hidden="true">AN</div>
+            <div class="who">
+              <span class="name">Ana</span>
+              <span class="meta">Hoy · 09:12</span>
+            </div>
           </div>
-        </div>
-
-        <div class="panel" style="display: flex; flex-direction: column; gap: 12px;">
-          <h2 style="font-size: 1.1rem; margin: 0;">Carga laboral</h2>
-          <div style="background: var(--wa-out); border-radius: 14px; padding: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); font-size: 14px; line-height: 1.4;">
-            Hola maestra voy para mi trabajo voy a llegar y ahí tomaré la clase. Espero estar en unos 40 min, muchas gracias por su comprensión.
+          <div class="bubble in">
+            Maestra, buenas tardes. Voy a conectarme desde mi cel porque no tengo internet; me estoy trasladando a la capital y me falta una hora por llegar.
+            <span class="time">09:12</span>
           </div>
-        </div>
+        </article>
 
-        <div class="panel" style="display: flex; flex-direction: column; gap: 12px;">
-          <h2 style="font-size: 1.1rem; margin: 0;">Tareas de cuidado</h2>
-          <div style="background: var(--wa-out); border-radius: 14px; padding: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); font-size: 14px; line-height: 1.4;">
-            Hola, maestra Betsy, perdone que no me conecté, no pudo cuidar mi esposo a mis hijos, estoy viendo el classroom…
+        <!-- Card 2: Carga laboral -->
+        <article class="wa-card">
+          <h3 class="tag">Carga laboral</h3>
+          <div class="header">
+            <div class="avatar" aria-hidden="true">LU</div>
+            <div class="who">
+              <span class="name">Luis</span>
+              <span class="meta">Hoy · 09:40</span>
+            </div>
           </div>
-        </div>
-
-        <div class="panel" style="display: flex; flex-direction: column; gap: 12px;">
-          <h2 style="font-size: 1.1rem; margin: 0;">Trayectorias académicas diversas</h2>
-          <div style="background: var(--wa-out); border-radius: 14px; padding: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); font-size: 14px; line-height: 1.4;">
-            Maestra Betsy muchas gracias por su ayuda honestamente lo que pasa es que yo no he tenido experiencia de investigación antes, entonces me está costando mucho, en donde yo estudié nos titulamos por trabajar con la comunidad y ahora me está costando mucho.
+          <div class="bubble in">
+            Hola, maestra. Voy para mi trabajo; llegaré y ahí tomaré la clase. Espero estar en unos 40 min, muchas gracias por su comprensión.
+            <span class="time">09:40</span>
           </div>
-        </div>
+        </article>
 
+        <!-- Card 3: Tareas de cuidado -->
+        <article class="wa-card">
+          <h3 class="tag">Tareas de cuidado</h3>
+          <div class="header">
+            <div class="avatar" aria-hidden="true">MA</div>
+            <div class="who">
+              <span class="name">María</span>
+              <span class="meta">Hoy · 10:05</span>
+            </div>
+          </div>
+          <div class="bubble in">
+            Hola, maestra Betsy, perdone que no me conecté. No pudo cuidar mi esposo a mis hijos; estoy viendo el Classroom…
+            <span class="time">10:05</span>
+          </div>
+        </article>
+
+        <!-- Card 4: Trayectorias académicas diversas -->
+        <article class="wa-card">
+          <h3 class="tag">Trayectorias académicas diversas</h3>
+          <div class="header">
+            <div class="avatar" aria-hidden="true">JO</div>
+            <div class="who">
+              <span class="name">José</span>
+              <span class="meta">Hoy · 10:27</span>
+            </div>
+          </div>
+          <div class="bubble in">
+            Maestra Betsy, muchas gracias por su ayuda. Lo que pasa es que no he tenido experiencia de investigación antes; en donde estudié nos titulamos por trabajo comunitario, y ahora me está costando mucho.
+            <span class="time">10:27</span>
+          </div>
+        </article>
       </div>
     </section>
 
-    <!-- FIX: Agrego el contenedor que usa el JS para los dots -->
-    <div id="nav" class="nav" aria-label="Navegación de diapositivas"></div>
-
-    <div class="footer">Usa ← → para navegar</div>
 
   </div> <!-- /deck -->
 
@@ -247,7 +323,7 @@
 
       const nav = document.getElementById('nav');
       function updateDots() {
-        if (!nav) return; // safety
+        if (!nav) return;
         nav.innerHTML = '';
         deck.forEach((_, n) => {
           const d = document.createElement('div');
@@ -284,7 +360,7 @@
         setTimeout(add, 700);
       }
 
-      updateDots();
+      updateDots(); // inicializa
     })();
   </script>
 </body>
