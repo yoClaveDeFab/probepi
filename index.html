@@ -101,6 +101,56 @@
       </div>
     </section>
 
+      <script>
+    (function () {
+      const deck = document.querySelectorAll('.slide');
+      let idx = 0;
+      function show(i) {
+        deck.forEach((s, n) => {
+          s.classList.toggle('active', n === i);
+          s.classList.toggle('inactive', n !== i);
+        });
+        idx = i;
+        updateDots();
+        if (i === 1) startWA();
+      }
+      const nav = document.getElementById('nav');
+      function updateDots() {
+        nav.innerHTML = '';
+        deck.forEach((_, n) => {
+          const d = document.createElement('div');
+          d.className = 'dot' + (n === idx ? ' active' : '');
+          d.addEventListener('click', () => show(n));
+          nav.appendChild(d);
+        });
+      }
+      document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight') show(Math.min(idx + 1, deck.length - 1));
+        if (e.key === 'ArrowLeft') show(Math.max(idx - 1, 0));
+      });
+      function startWA() {
+        const chat = document.getElementById('chat');
+        const msgs = [
+          { type: 'in', text: '¡Hola, Betsy! 😊 ¿Tienes disponibilidad para dar una clase de redacción para octubre… es para Probepi 🙌?', time: '10:02' },
+          { type: 'out', text: '¡Claro que sííí! Muchísimas gracias por pensar en mí 🤍', time: '10:03' },
+        ];
+        let i = 0;
+        function add() {
+          if (i >= msgs.length) return;
+          const m = msgs[i++];
+          const b = document.createElement('div');
+          b.className = 'bubble ' + (m.type === 'out' ? 'out' : 'in');
+          b.innerHTML = `${m.text} <span class="time">${m.time}${m.type === 'out' ? '<span class="tick">✔✔</span>' : ''}</span>`;
+          chat.appendChild(b);
+          chat.scrollTop = chat.scrollHeight;
+          setTimeout(add, 1000 + Math.random() * 600);
+        }
+        setTimeout(add, 700);
+      }
+      updateDots();
+    })();
+  </script>
+
     <!-- 3: Sesiones y logística -->
     <section class="slide inactive" data-index="2">
       <div class="layout">
@@ -191,7 +241,7 @@
   </div>
 </section>
 
-<!-- Slide 6: Retos derivados del estudiantado -->
+    <!-- Slide 6: Retos derivados del estudiantado -->
 <section class="slide inactive" data-index="5">
   <div class="layout" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
     
@@ -223,65 +273,7 @@
     <div class="panel" style="display: flex; flex-direction: column; gap: 12px;">
       <h2 style="font-size: 1.1rem; margin: 0;">Trayectorias académicas diversas</h2>
       <div style="background: var(--wa-out); border-radius: 14px; padding: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); font-size: 14px; line-height: 1.4;">
-        Maestra Betsy muchas gracias por su ayuda, honestamente lo que pasa es que yo no he tenido experiencia de investigación antes, entonces me está costando mucho, en donde yo estudié nos titulamos por trabajar con la comunidad y ahora me está costando mucho.
-      </div>
-    </div>
+        Maestra Betsy muchas gracias por su ayuda honestamente lo que pasa es que yo no he tenido experiencia de investigación antes, entonces me está costando mucho, en donde yo estudié nos titulamos por trabajar con la comunidad y ahora me está costando mucho.
 
-  </div>
-  <div class="caption">Mensajes reales que muestran las condiciones y contextos de aprendizaje del estudiantado.</div>
-</section>
-
-
-    
-
-  <script>
-    (function () {
-      const deck = document.querySelectorAll('.slide');
-      let idx = 0;
-      function show(i) {
-        deck.forEach((s, n) => {
-          s.classList.toggle('active', n === i);
-          s.classList.toggle('inactive', n !== i);
-        });
-        idx = i;
-        updateDots();
-        if (i === 1) startWA();
-      }
-      const nav = document.getElementById('nav');
-      function updateDots() {
-        nav.innerHTML = '';
-        deck.forEach((_, n) => {
-          const d = document.createElement('div');
-          d.className = 'dot' + (n === idx ? ' active' : '');
-          d.addEventListener('click', () => show(n));
-          nav.appendChild(d);
-        });
-      }
-      document.addEventListener('keydown', e => {
-        if (e.key === 'ArrowRight') show(Math.min(idx + 1, deck.length - 1));
-        if (e.key === 'ArrowLeft') show(Math.max(idx - 1, 0));
-      });
-      function startWA() {
-        const chat = document.getElementById('chat');
-        const msgs = [
-          { type: 'in', text: '¡Hola, Betsy! 😊 ¿Tienes disponibilidad para dar una clase de redacción para octubre… es para Probepi 🙌?', time: '10:02' },
-          { type: 'out', text: '¡Claro que sííí! Muchísimas gracias por pensar en mí 🤍', time: '10:03' },
-        ];
-        let i = 0;
-        function add() {
-          if (i >= msgs.length) return;
-          const m = msgs[i++];
-          const b = document.createElement('div');
-          b.className = 'bubble ' + (m.type === 'out' ? 'out' : 'in');
-          b.innerHTML = `${m.text} <span class="time">${m.time}${m.type === 'out' ? '<span class="tick">✔✔</span>' : ''}</span>`;
-          chat.appendChild(b);
-          chat.scrollTop = chat.scrollHeight;
-          setTimeout(add, 1000 + Math.random() * 600);
-        }
-        setTimeout(add, 700);
-      }
-      updateDots();
-    })();
-  </script>
 </body>
 </html>
