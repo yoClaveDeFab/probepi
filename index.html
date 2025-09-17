@@ -352,7 +352,127 @@
       </div>
     </section>
 
-  
+  <!-- 8: Soluciones implementadas -->
+<style>
+  .solutions-grid{
+    width: min(1100px,94vw);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    gap: 22px;
+    align-items: stretch;
+  }
+  .sol-card{
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:18px;
+    box-shadow:0 8px 24px rgba(17,24,39,.06);
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .sol-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .sol-ico{
+    width:42px;height:42px;border-radius:12px;
+    display:grid;place-items:center;
+    background:#eff6ff;border:1px solid #bfdbfe;color:#1d4ed8;
+  }
+  .sol-title{
+    font-weight:700;font-size: clamp(14px,2.1vw,18px);
+  }
+  .sol-desc{ color: var(--muted); font-size: 14px; line-height: 1.35; }
+  .badges{ display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
+  .badge{
+    background:#f3f4f6;border:1px solid #e5e7eb;color:#374151;
+    padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600;
+  }
+  .sol-note{ font-size:12px;color:#6b7280;margin-top:4px; }
+</style>
+
+<section class="slide inactive" data-index="8">
+  <div class="title" style="margin-bottom: 16px;">
+    <h2 style="margin:0; font-size: clamp(20px, 2.6vw, 34px);">
+      Soluciones implementadas
+    </h2>
+    <p class="caption">Acciones para mitigar conectividad, solapamientos y disponibilidad.</p>
+  </div>
+
+  <div class="solutions-grid">
+    <!-- 1) Acompañamiento escrito -->
+    <article class="sol-card">
+      <div class="sol-head">
+        <div class="sol-ico" aria-hidden="true">💬</div>
+        <div class="sol-title">Acompañamiento escrito</div>
+      </div>
+      <p class="sol-desc">
+        Resolución de dudas y retro asincrónica para sostener el ritmo de avance aun con intermitencias.
+      </p>
+      <div class="badges">
+        <span class="badge">WhatsApp</span>
+        <span class="badge">Classroom</span>
+        <span class="badge">Correo</span>
+      </div>
+      <div class="sol-note">Mensajes claros, checklist por tarea y confirmación de recepción.</div>
+    </article>
+
+    <!-- 2) División del tiempo por alumno -->
+    <article class="sol-card">
+      <div class="sol-head">
+        <div class="sol-ico" aria-hidden="true">⏱️</div>
+        <div class="sol-title">División del tiempo por alumno</div>
+      </div>
+      <p class="sol-desc">
+        Segmentación de la asesoría para garantizar turnos breves y efectivos con objetivos puntuales.
+      </p>
+      <div class="badges">
+        <span class="badge">Micro‑turnos</span>
+        <span class="badge">Objetivos por bloque</span>
+        <span class="badge">Rúbrica breve</span>
+      </div>
+      <div class="sol-note">Evita esperas largas y asegura retro individual en cada sesión.</div>
+    </article>
+
+    <!-- 3) Grabaciones temáticas -->
+    <article class="sol-card">
+      <div class="sol-head">
+        <div class="sol-ico" aria-hidden="true">🎥</div>
+        <div class="sol-title">Grabaciones de temas específicos</div>
+      </div>
+      <p class="sol-desc">
+        Clips cortos (5–10 min) sobre puntos críticos: puntuación, citación APA, clases de palabras, etc.
+      </p>
+      <div class="badges">
+        <span class="badge">Biblioteca</span>
+        <span class="badge">On‑demand</span>
+        <span class="badge">Accesibles</span>
+      </div>
+      <div class="sol-note">Vinculadas en Classroom por unidad para consulta rápida.</div>
+    </article>
+
+    <!-- 4) Llamadas por Calendly -->
+    <article class="sol-card">
+      <div class="sol-head">
+        <div class="sol-ico" aria-hidden="true">📅</div>
+        <div class="sol-title">Llamadas agendadas por Calendly</div>
+      </div>
+      <p class="sol-desc">
+        Espacios extra fuera de clase para resolver bloqueos y revisar avances de anteproyecto.
+      </p>
+      <div class="badges">
+        <span class="badge">Fuera de horario</span>
+        <span class="badge">15–20 min</span>
+        <span class="badge">1:1</span>
+      </div>
+      <div class="sol-note">Confirmación automática y recordatorios para reducir ausencias.</div>
+    </article>
+  </div>
+</section>
+
   </div> <!-- /deck -->
 
   <!-- JS al final del body -->
